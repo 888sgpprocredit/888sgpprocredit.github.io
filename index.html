@@ -433,7 +433,7 @@ class="message">
 
 
 
-<a class="whatsapp" href="https://wa.me/6583091814" target="_blank" rel="noopener">
+<a class="whatsapp" id="whatsappLink" href="https://wa.me/6583091814" target="_blank" rel="noopener">
     <span id="whatsappTitle">WhatsApp 联系我们</span>
     <small id="whatsappText">有任何疑问？立即咨询我们！</small>
 </a>
@@ -592,6 +592,7 @@ const translations = {
         heroText: "简单申请 · 快速回复 · 专业服务",
         whatsappTitle: "WhatsApp 联系我们",
         whatsappText: "有任何疑问？立即咨询我们！",
+        whatsappMessage: "我对你们的服务非常感兴趣，想了解更多！",
         footerNote: "您的信任 · 我们的承诺"
     },
     en: {
@@ -612,6 +613,7 @@ const translations = {
         heroText: "Simple application · Fast response · Professional service",
         whatsappTitle: "Contact us on WhatsApp",
         whatsappText: "Have any questions? Chat with us now!",
+        whatsappMessage: "I am very interested in your services and would like to know more!",
         footerNote: "Your trust · Our commitment"
     }
 };
@@ -626,6 +628,8 @@ function setLanguage(lang) {
     document.getElementById("heroText").innerText = t.heroText;
     document.getElementById("whatsappTitle").innerText = t.whatsappTitle;
     document.getElementById("whatsappText").innerText = t.whatsappText;
+    document.getElementById("whatsappLink").href =
+        "https://wa.me/6583091814?text=" + encodeURIComponent(t.whatsappMessage);
     document.getElementById("footerNote").innerText = t.footerNote;
 
     document.getElementById("nameLabel").innerHTML = t.name + ' <span class="required">*</span>';
