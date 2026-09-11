@@ -42,6 +42,26 @@ body {
     margin-bottom: 8px;
 }
 
+.language-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.language-switcher button {
+    width: auto;
+    padding: 8px 14px;
+    font-size: 14px;
+    background: #eee;
+    color: #222;
+}
+
+.language-switcher button.active {
+    background: #111;
+    color: white;
+}
+
 .subtitle {
     text-align: center;
     color: #777;
@@ -129,7 +149,12 @@ button:disabled {
 Loan Application
 </div>
 
-<div class="subtitle">
+<div class="language-switcher">
+<button type="button" id="zhButton" class="active">中文</button>
+<button type="button" id="enButton">English</button>
+</div>
+
+<div class="subtitle" id="subtitle">
 请填写以下资料，我们会尽快与您联系
 </div>
 
@@ -139,7 +164,7 @@ Loan Application
 
 <div class="form-group">
 
-<label>
+<label id="nameLabel">
 姓名 <span class="required">*</span>
 </label>
 
@@ -154,7 +179,21 @@ required>
 
 <div class="form-group">
 
-<label>
+<label id="dobLabel">
+出生日期 <span class="required">*</span>
+</label>
+
+<input
+type="date"
+id="dob"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label id="addressLabel">
 地址 <span class="required">*</span>
 </label>
 
@@ -168,7 +207,7 @@ required></textarea>
 
 <div class="form-group">
 
-<label>
+<label id="phoneLabel">
 手机号码 <span class="required">*</span>
 </label>
 
@@ -183,7 +222,7 @@ required>
 
 <div class="form-group">
 
-<label>
+<label id="jobLabel">
 工作 <span class="required">*</span>
 </label>
 
@@ -198,7 +237,7 @@ required>
 
 <div class="form-group">
 
-<label>
+<label id="amountLabel">
 贷款额度 <span class="required">*</span>
 </label>
 
@@ -361,7 +400,6 @@ let currentLanguage = "zh";
 
 const translations = {
     zh: {
-        title: "Loan Application",
         subtitle: "请填写以下资料，我们会尽快与您联系",
         name: "姓名",
         namePlaceholder: "请输入您的姓名",
@@ -377,7 +415,6 @@ const translations = {
         submit: "提交资料"
     },
     en: {
-        title: "Loan Application",
         subtitle: "Please fill in the details below and we will contact you soon.",
         name: "Full Name",
         namePlaceholder: "Please enter your full name",
@@ -399,7 +436,6 @@ function setLanguage(lang) {
     const t = translations[lang];
 
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-
     document.getElementById("subtitle").innerText = t.subtitle;
 
     document.getElementById("nameLabel").innerHTML = t.name + ' <span class="required">*</span>';
@@ -421,14 +457,8 @@ function setLanguage(lang) {
     document.getElementById("enButton").classList.toggle("active", lang === "en");
 }
 
-document.getElementById("zhButton").addEventListener("click", function () {
-    setLanguage("zh");
-});
-
-document.getElementById("enButton").addEventListener("click", function () {
-    setLanguage("en");
-});
-
+document.getElementById("zhButton").addEventListener("click", () => setLanguage("zh"));
+document.getElementById("enButton").addEventListener("click", () => setLanguage("en"));
 setLanguage("zh");
 
 </script>
