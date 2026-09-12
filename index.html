@@ -618,38 +618,6 @@ const translations = {
     }
 };
 
-function updateWhatsAppLink() {
-    const t = translations[currentLanguage];
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const amount = document.getElementById("amount").value.trim();
-
-    let message = t.whatsappMessage;
-
-    if (currentLanguage === "zh") {
-        if (name) message += "\n姓名：" + name;
-        if (phone) message += "\n手机号码：" + phone;
-        if (amount) {
-            const formattedAmount = Number(amount).toLocaleString("en-US");
-            message += "\n贷款额度：$" + formattedAmount;
-        }
-    } else {
-        if (name) message += "\nName: " + name;
-        if (phone) message += "\nMobile: " + phone;
-        if (amount) {
-            const formattedAmount = Number(amount).toLocaleString("en-US");
-            message += "\nLoan Amount: $" + formattedAmount;
-        }
-    }
-
-    document.getElementById("whatsappLink").href =
-        "https://wa.me/6583091814?text=" + encodeURIComponent(message);
-}
-
-["name", "phone", "amount"].forEach(function(id) {
-    document.getElementById(id).addEventListener("input", updateWhatsAppLink);
-});
-
 function setLanguage(lang) {
     currentLanguage = lang;
     const t = translations[lang];
@@ -660,7 +628,8 @@ function setLanguage(lang) {
     document.getElementById("heroText").innerText = t.heroText;
     document.getElementById("whatsappTitle").innerText = t.whatsappTitle;
     document.getElementById("whatsappText").innerText = t.whatsappText;
-    updateWhatsAppLink();
+    document.getElementById("whatsappLink").href =
+        "https://wa.me/6583091814?text=" + encodeURIComponent(t.whatsappMessage);
     document.getElementById("footerNote").innerText = t.footerNote;
 
     document.getElementById("nameLabel").innerHTML = t.name + ' <span class="required">*</span>';
